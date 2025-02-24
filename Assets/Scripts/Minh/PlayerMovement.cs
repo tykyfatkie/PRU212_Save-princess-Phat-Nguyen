@@ -27,8 +27,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Run();
         FlipSprite();
-        animator.SetFloat("yVelocity", myRigidbody.velocity.y);
-        if (isGrounded() && myRigidbody.velocity.y == 0)
+        animator.SetFloat("yVelocity", myRigidbody.linearVelocity.y);
+        if (isGrounded() && myRigidbody.linearVelocity.y == 0)
         {
             animator.SetBool("isJumping", false);
         }
@@ -44,15 +44,15 @@ public class PlayerMovement : MonoBehaviour
 
         if (value.isPressed && isGrounded())
         {
-            Vector2 playerVelocity = new Vector2(myRigidbody.velocity.x, jumpPower);
-            myRigidbody.velocity = playerVelocity;
+            Vector2 playerVelocity = new Vector2(myRigidbody.linearVelocity.x, jumpPower);
+            myRigidbody.linearVelocity = playerVelocity;
             animator.SetBool("isJumping", true);
         }
     }
     void Run()
     {
-        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = playerVelocity;
+        Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.linearVelocity.y);
+        myRigidbody.linearVelocity = playerVelocity;
         animator.SetFloat("xVelocity", Math.Abs(playerVelocity.x));
     }
 
