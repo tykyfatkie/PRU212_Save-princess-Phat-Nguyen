@@ -13,14 +13,14 @@ TagManager:
   - Water
   - UI
   - Ground
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Climbing
+  - Player
+  - Enemies
+  - Decoration
+  - Bounce
+  - Spike
+  - Interactables
+  - Ice
   - 
   - 
   - 
@@ -56,6 +56,21 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 1330512579
+    locked: 0
+  - name: Climbing
+    uniqueID: 2032118703
+    locked: 0
+  - name: Bounce
+    uniqueID: 1971936613
+    locked: 0
+  - name: Spike
+    uniqueID: 2321031959
+    locked: 0
+  - name: Interactables
+    uniqueID: 1028150181
+    locked: 0
+  - name: Enemies
+    uniqueID: 3419280769
     locked: 0
   - name: Player
     uniqueID: 2368666867
