@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 3
   tags:
   - Grounded
+  - Fire
+  - Ground
+  - Mushroom
+  - Slimer
+  - Bat
+  - Health
   layers:
   - Default
   - TransparentFX
@@ -21,7 +27,7 @@ TagManager:
   - Spike
   - Interactables
   - Ice
-  - 
+  - Enemy
   - 
   - 
   - 
