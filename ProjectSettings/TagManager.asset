@@ -28,11 +28,11 @@ TagManager:
   - Interactables
   - Ice
   - Enemy
-  - 
-  - 
-  - 
-  - 
-  - 
+  - PoisonFire
+  - Health
+  - BatFly
+  - Mushroom
+  - Stalactites
   - 
   - 
   - 

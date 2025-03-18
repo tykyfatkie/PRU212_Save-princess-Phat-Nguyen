@@ -50,7 +50,7 @@ public class SlimerAI : MonoBehaviour
 	{
 		if (player != null && Vector2.Distance(transform.position, player.position) <= attackRange)
 		{
-			player.GetComponent<PlayerController>().TakeDamage(attackDamage);
+			player.GetComponent<MainPlayer>().TakeDamage(attackDamage);
 		}
 	}
 
@@ -59,7 +59,7 @@ public class SlimerAI : MonoBehaviour
 	{
 		if (collision.CompareTag("Player"))
 		{
-			PlayerController player = collision.GetComponent<PlayerController>();
+			MainPlayer player = collision.GetComponent<MainPlayer>();
 			if (player != null && !player.isInvulnerable)
 			{
 				player.TakeDamage(attackDamage);
