@@ -28061,7 +28061,7 @@ GameObject:
   - component: {fileID: 860379897}
   - component: {fileID: 860379899}
   - component: {fileID: 860379900}
-  m_Layer: 0
+  m_Layer: 23
   m_Name: ToxicZone
   m_TagString: Untagged
   m_Icon: {fileID: 0}

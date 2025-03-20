@@ -11,6 +11,13 @@ TagManager:
   - Slimer
   - Bat
   - Health
+  - Key
+  - CameraChange
+  - Enemy - Jumper
+  - Enemy - Crab
+  - HealthPotion
+  - CongDichChuyen
+  - Trap
   layers:
   - Default
   - TransparentFX
@@ -33,9 +40,9 @@ TagManager:
   - BatFly
   - Mushroom
   - Stalactites
-  - 
-  - 
-  - 
+  - Crab
+  - Gate
+  - Trap
   - 
   - 
   - 
@@ -80,6 +87,9 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 2368666867
+    locked: 0
+  - name: UI
+    uniqueID: 2840355143
     locked: 0
   m_RenderingLayers:
   - Default
