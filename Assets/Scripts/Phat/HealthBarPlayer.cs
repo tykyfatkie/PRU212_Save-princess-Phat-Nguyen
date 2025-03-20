@@ -4,8 +4,8 @@ using UnityEngine.UI;
 
 public class HealthBarPlayer : MonoBehaviour
 {
-    public int maxHealth = 2;
-    public int currentHealth = 2;
+    public int maxHealth = 5;
+    public int currentHealth = 4;
     public Sprite fullHeart;
     public Sprite emptyHeart;
     public GameObject heartPrefab;
