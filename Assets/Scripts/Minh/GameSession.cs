@@ -31,50 +31,48 @@ public class GameSession : MonoBehaviour
     }
 
 
-    
+
 
     public void ProcessPlayerDeath()
     {
+
         StartCoroutine(WaitAndRestart());
     }
 
     private IEnumerator WaitAndRestart()
     {
-        yield return new WaitForSeconds(0.5f);
-
         if (playerLives.currentHealth > 1)
-        {
+        {  
             playerLives.TakeDamage(1);
-            if (!isInvulnerable){
+            if (!isInvulnerable)
+            {
                 StartCoroutine(Invulnerability());
             }
+            yield return new WaitForSeconds(1f);
             var player = FindAnyObjectByType<PlayerMovement>();
             player.isAlive = true;
         }
         else
         {
             SceneManager.LoadScene(1);
-            //Destroy(gameObject);
             playerLives = FindObjectOfType<HealthBar>();
             playerLives.SetHealth(3);
-
         }
+        
     }
 
     private IEnumerator Invulnerability()
     {
-        
         SpriteRenderer player = FindObjectOfType<PlayerMovement>().GetComponent<SpriteRenderer>();
         //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
-            isInvulnerable = true;
-            for (int i = 0; i < 5; i++)
-            {
-                player.enabled = false;
-                yield return new WaitForSeconds(0.1f);
-                player.enabled = true;
-                yield return new WaitForSeconds(0.1f);
-            }
-            isInvulnerable = false;
-        yield return new WaitForSeconds(1f);
+        isInvulnerable = true;
+        for (int i = 0; i < 5; i++)
+        {
+            player.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            player.enabled = true;
+            yield return new WaitForSeconds(0.1f);
+        }
+        isInvulnerable = false;
     }
 }
