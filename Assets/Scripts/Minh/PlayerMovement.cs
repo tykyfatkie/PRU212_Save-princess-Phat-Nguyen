@@ -31,7 +31,7 @@ public class PlayerMovement : MonoBehaviour
     private float attackTime = 0.2f;
     private float attackCooldown = 0.5f;
     //Live/Death
-    private bool isAlive = true;
+    public bool isAlive = true;
     private Vector2 deathkick = new Vector2(10f, 10f);
     #endregion
 
@@ -160,10 +160,19 @@ public class PlayerMovement : MonoBehaviour
 
             isAlive = false;
             myAnimator.SetTrigger("isDying");
-            myRigidbody.linearVelocity = deathkick;
+            if(!isFacingRight)
+                myRigidbody.linearVelocity = deathkick;
+            else
+            {
+                deathkick.x = -deathkick.x;
+                myRigidbody.linearVelocity = deathkick;
+            }
+                
+            Debug.Log("Die");
 
+            //FindAnyObjectByType<HealthBar>().TakeDamage(1);
             FindAnyObjectByType<GameSession>().ProcessPlayerDeath();
-            FindAnyObjectByType<HealthBar>().TakeDamage(1);
+            
 
         }
     }

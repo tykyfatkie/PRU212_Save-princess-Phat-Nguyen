@@ -19,7 +19,7 @@ public class HealthBar : MonoBehaviour
 
     void CreateHearts()
     {
-        //Khoảng cách giữa các trái tim
+        //Khoảng cách giữa các trái tym
         float spacing = 100f;
 
         for (int i = 0; i < maxHealth; i++)
@@ -36,6 +36,7 @@ public class HealthBar : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+        Debug.Log("Current Health: " + currentHealth);
         if (currentHealth < 0) currentHealth = 0;
         UpdateHearts();
     }
@@ -44,7 +45,8 @@ public class HealthBar : MonoBehaviour
     {
         for (int i = 0; i < hearts.Count; i++)
         {
-            Image heartImage = hearts[i].GetComponent<Image>(); //Lấy UI Image thay vì SpriteRenderer
+            //Lấy UI Image thay vì SpriteRenderer
+            Image heartImage = hearts[i].GetComponent<Image>();
 
             if (i < currentHealth)
             {
@@ -57,4 +59,13 @@ public class HealthBar : MonoBehaviour
         }
     }
 
+    public void SetHealth(int newHealth)
+    {
+        currentHealth = newHealth;
+
+        //Đảm bảo không vượt quá giới hạn
+        if (currentHealth > maxHealth) currentHealth = maxHealth;
+
+        UpdateHearts(); //Cập nhật UI
+    }
 }
