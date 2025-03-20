@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class Enemy : MonoBehaviour
+
+public class EnemyJumper : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
     [SerializeField] private float distance = 8f;

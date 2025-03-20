@@ -100,7 +100,7 @@ public class PlayerControllerAct6 : MonoBehaviour
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
             foreach (Collider2D enemy in hitEnemies)
             {
-                Enemy enemyComponent = enemy.GetComponent<Enemy>();
+                EnemyJumper enemyComponent = enemy.GetComponent<EnemyJumper>();
                 if (enemyComponent != null)
                 {
                     enemyComponent.JumperTakeDamage(attackDamage);
