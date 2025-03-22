@@ -17,7 +17,7 @@ public class PlayerControllerAct6 : MonoBehaviour
     private AudioManagerAct6 audioManager;
     private float timer = 0;
     private bool canMove = false;
-    private bool isHurt = false; // Thêm biến kiểm tra trạng thái bị thương
+    private bool isHurt = false; 
 
     //==================attack==================
     private bool isAttacking = false;
@@ -45,7 +45,7 @@ public class PlayerControllerAct6 : MonoBehaviour
 
     void Update()
     {
-        if (!canMove || isHurt) return; // Không di chuyển nếu đang bị thương
+        if (!canMove || isHurt) return; 
 
         if (gameManager.IsGameOver())
             return;
@@ -89,24 +89,38 @@ public class PlayerControllerAct6 : MonoBehaviour
 
     private void HandleAttack()
     {
-        isAttacking = true;
-        if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime)
+        if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime && !isAttacking)
         {
+            isAttacking = true;
             animator.SetTrigger("isAttacking");
             audioManager.PlayAttackSound();
             nextAttackTime = Time.time + 1f / attackRate;
-            StartCoroutine(ResetAttackAnimation());
 
-            Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
-            foreach (Collider2D enemy in hitEnemies)
+            // Gọi coroutine để xử lý sát thương sau 1 giây
+            StartCoroutine(DealDamageAfterDelay(0.25f));
+        }
+    }
+
+    // Coroutine mới để xử lý sát thương sau 1 giây
+    private IEnumerator DealDamageAfterDelay(float delay)
+    {
+        // Đợi theo thời gian delay trước khi gây sát thương
+        yield return new WaitForSeconds(delay);
+
+        // Gây sát thương cho kẻ địch trong phạm vi
+        Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
+        foreach (Collider2D enemy in hitEnemies)
+        {
+            EnemyJumper enemyComponent = enemy.GetComponent<EnemyJumper>();
+            if (enemyComponent != null)
             {
-                EnemyJumper enemyComponent = enemy.GetComponent<EnemyJumper>();
-                if (enemyComponent != null)
-                {
-                    enemyComponent.JumperTakeDamage(attackDamage);
-                }
+                enemyComponent.JumperTakeDamage(attackDamage);
             }
         }
+
+        // Reset trạng thái tấn công
+        isAttacking = false;
+        animator.ResetTrigger("isAttacking");
     }
 
     private void UpdateAnimation()
@@ -132,20 +146,13 @@ public class PlayerControllerAct6 : MonoBehaviour
         Gizmos.DrawWireSphere(attackPoint.position, attackRange);
     }
 
-    private IEnumerator ResetAttackAnimation()
-    {
-        yield return new WaitForSeconds(0.1f);
-        isAttacking = false;
-        animator.ResetTrigger("isAttacking");
-    }
-
     // Hàm xử lý khi nhân vật bị thương
     public void TakeDamage()
     {
         if (isHurt) return; // Nếu đang bị thương thì không xử lý tiếp
 
         isHurt = true; // Đặt trạng thái bị thương
-        StartCoroutine(DisableMovementForSeconds(1f)); // Không cho di chuyển trong 1 giây
+        StartCoroutine(DisableMovementForSeconds(1.5f)); // Không cho di chuyển trong 1 giây
     }
 
     // Coroutine để vô hiệu hóa di chuyển trong một khoảng thời gian
