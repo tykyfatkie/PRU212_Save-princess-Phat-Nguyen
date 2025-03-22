@@ -10,6 +10,7 @@ public class GameSession : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     // private int playerLives = 5;
+    [SerializeField] private GameObject gameOverUi;
     public HealthBar playerLives;
     //[SerializeField] int score = 0;
     public bool isInvulnerable = false;
@@ -18,6 +19,7 @@ public class GameSession : MonoBehaviour
 
     void Awake()
     {
+        gameOverUi.SetActive(false);
         int numGameSessions = FindObjectsOfType<GameSession>().Length;
         playerLives = FindObjectOfType<HealthBar>();
         if (numGameSessions > 1)
@@ -39,32 +41,43 @@ public class GameSession : MonoBehaviour
         StartCoroutine(WaitAndRestart());
     }
 
-    private IEnumerator WaitAndRestart()
+    public IEnumerator WaitAndRestart()
     {
+        var player = FindAnyObjectByType<PlayerMovement>();
         if (playerLives.currentHealth > 1)
-        {  
+        {
             playerLives.TakeDamage(1);
             if (!isInvulnerable)
             {
                 StartCoroutine(Invulnerability());
             }
             yield return new WaitForSeconds(1f);
-            var player = FindAnyObjectByType<PlayerMovement>();
             player.isAlive = true;
         }
         else
         {
-            SceneManager.LoadScene(1);
-            playerLives = FindObjectOfType<HealthBar>();
-            playerLives.SetHealth(3);
+            player.isAlive = false;
+            gameOverUi.SetActive(true);
+            Time.timeScale = 0;
+            playerLives.SetHealth(0);
         }
-        
+
     }
+
+    public void PlayAgain()
+    {
+        gameOverUi.SetActive(false);
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
+        //playerLives = FindObjectOfType<HealthBar>();
+        playerLives.SetHealth(3);
+    
+    }
+
 
     private IEnumerator Invulnerability()
     {
         SpriteRenderer player = FindObjectOfType<PlayerMovement>().GetComponent<SpriteRenderer>();
-        //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         isInvulnerable = true;
         for (int i = 0; i < 5; i++)
         {

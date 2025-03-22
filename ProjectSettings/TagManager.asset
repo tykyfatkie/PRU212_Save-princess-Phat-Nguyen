@@ -18,6 +18,8 @@ TagManager:
   - HealthPotion
   - CongDichChuyen
   - Trap
+  - DeathZone
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -44,8 +46,8 @@ TagManager:
   - Gate
   - Trap
   - 
-  - 
-  - 
+  - DeathZone
+  - Ceiling
   - 
   - 
   - 
