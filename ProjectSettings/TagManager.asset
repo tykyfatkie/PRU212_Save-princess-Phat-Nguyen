@@ -19,6 +19,7 @@ TagManager:
   - CongDichChuyen
   - Trap
   - DeathZone
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -44,9 +45,9 @@ TagManager:
   - Crab
   - Gate
   - Trap
-  - Ice
-  - DeathZone
   - 
+  - DeathZone
+  - Ceiling
   - 
   - 
   - 
