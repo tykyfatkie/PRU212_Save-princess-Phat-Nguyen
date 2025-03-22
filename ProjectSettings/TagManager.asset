@@ -18,6 +18,7 @@ TagManager:
   - HealthPotion
   - CongDichChuyen
   - Trap
+  - DeathZone
   layers:
   - Default
   - TransparentFX
@@ -43,8 +44,8 @@ TagManager:
   - Crab
   - Gate
   - Trap
-  - 
-  - 
+  - Ice
+  - DeathZone
   - 
   - 
   - 

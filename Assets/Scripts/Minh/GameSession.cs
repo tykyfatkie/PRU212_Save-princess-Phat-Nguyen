@@ -64,7 +64,6 @@ public class GameSession : MonoBehaviour
     private IEnumerator Invulnerability()
     {
         SpriteRenderer player = FindObjectOfType<PlayerMovement>().GetComponent<SpriteRenderer>();
-        //AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().buildIndex);
         isInvulnerable = true;
         for (int i = 0; i < 5; i++)
         {

@@ -222,17 +222,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a6cd9f6841d6a45b29919a204d6639, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runSpeed: 10
-  jumpPower: 18
-  climbSpeed: 5
+  trailRenderer: {fileID: 6877856923424312812}
   attackOffset: {x: 0.88, y: 0}
   attackRange: 0.9
-  trailRenderer: {fileID: 6877856923424312812}
-  attackSFX: {fileID: 8300000, guid: 1fb21f7de8e736d40a23f501c4b371e6, type: 3}
-  deathSFX: {fileID: 8300000, guid: e14924eb150fcf14bbd67587d3116616, type: 3}
-  boxSize: {x: 1.19, y: 0.14}
-  castDistance: 0.79
-  deathkick: {x: 30, y: 30}
+  isAlive: 1
+  attackSFX: {fileID: 8300000, guid: 4aa459ea116187d4baf93d86798f63a7, type: 3}
+  jumpSFX: {fileID: 8300000, guid: 6b5e3f05a6192954a88fa0dbaa8cebad, type: 3}
+  deathSFX: {fileID: 8300000, guid: 98b7a3e28d218f044850699e71649b3d, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -242,6 +238,12 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  boxSize: {x: 1.19, y: 0.14}
+  castDistance: 0.79
+  moveInput: {x: 0, y: 0}
+  myCapsuleCollider: {fileID: 0}
+  myRigidbody: {fileID: 0}
+  myAnimator: {fileID: 0}
 --- !u!61 &416317547208301682
 BoxCollider2D:
   m_ObjectHideFlags: 0

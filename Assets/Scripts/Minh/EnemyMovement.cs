@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 2f;
     //[SerializeField] int maxHealth = 100;
 
-    int currentHealth;
+    int currentHealth = 100;
     bool isFacingRight = false;
     Rigidbody2D myRigidbody;
 
