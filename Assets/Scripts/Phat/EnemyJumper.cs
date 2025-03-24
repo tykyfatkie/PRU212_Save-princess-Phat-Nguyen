@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
-public class Enemy : MonoBehaviour
+
+public class EnemyJumper : MonoBehaviour
 {
     [SerializeField] private float speed = 3f;
     [SerializeField] private float distance = 8f;
@@ -9,6 +10,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float freezeTime = 0.5f;
     [SerializeField] private Color damageColor = Color.white;
     [SerializeField] private float stopDistance = 1.5f;
+    [SerializeField] private float playerContactFreezeTime = 3f; // Thời gian đứng yên khi chạm vào Player
     private Rigidbody2D rb;
     private Vector3 startPos;
     private bool movingRight = true;
@@ -177,4 +179,48 @@ public class Enemy : MonoBehaviour
         isFrozen = false;
     }
 
+    // Xử lý va chạm khi tiếp xúc với Player
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            // Khi va chạm với Player, đứng yên trong 3 giây
+            StartCoroutine(FreezeOnPlayerContact());
+        }
+    }
+
+    // Xử lý va chạm khi trigger với Player
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            // Khi tiếp xúc với Player thông qua trigger, đứng yên trong 3 giây
+            StartCoroutine(FreezeOnPlayerContact());
+        }
+    }
+
+    // Coroutine xử lý trạng thái đứng yên khi chạm vào Player
+    private IEnumerator FreezeOnPlayerContact()
+    {
+        isFrozen = true;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
+
+        // Đổi màu để thể hiện trạng thái bị đóng băng
+        spriteRenderer.color = Color.cyan;
+
+        Debug.Log("Enemy frozen after player contact!");
+
+        // Đứng yên trong 3 giây
+        yield return new WaitForSeconds(playerContactFreezeTime);
+
+        // Trở lại màu ban đầu
+        spriteRenderer.color = originalColor;
+
+        isFrozen = false;
+        Debug.Log("Enemy unfrozen after player contact!");
+    }
 }

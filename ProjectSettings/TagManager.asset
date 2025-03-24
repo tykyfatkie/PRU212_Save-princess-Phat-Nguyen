@@ -18,6 +18,8 @@ TagManager:
   - HealthPotion
   - CongDichChuyen
   - Trap
+  - DeathZone
+  - Ceiling
   layers:
   - Default
   - TransparentFX
@@ -44,8 +46,8 @@ TagManager:
   - Gate
   - Trap
   - 
-  - 
-  - 
+  - DeathZone
+  - Ceiling
   - 
   - 
   - 
@@ -90,6 +92,48 @@ TagManager:
     locked: 0
   - name: UI
     uniqueID: 2840355143
+    locked: 0
+  - name: P - Layer
+    uniqueID: 4233726077
+    locked: 0
+  - name: P - Decor
+    uniqueID: 1187595937
+    locked: 0
+  - name: P - Ground
+    uniqueID: 4001884031
+    locked: 0
+  - name: P - Default
+    uniqueID: 631249857
+    locked: 0
+  - name: P - Decor 2
+    uniqueID: 2375948831
+    locked: 0
+  - name: P - Background 2
+    uniqueID: 4157504419
+    locked: 0
+  - name: P - Background
+    uniqueID: 1726412797
+    locked: 0
+  - name: P - Enemy
+    uniqueID: 2208036841
+    locked: 0
+  - name: P - Player
+    uniqueID: 3567150203
+    locked: 0
+  - name: P - Platform
+    uniqueID: 1355387459
+    locked: 0
+  - name: P - ForeGround
+    uniqueID: 1370367745
+    locked: 0
+  - name: P - Decor
+    uniqueID: 263721411
+    locked: 0
+  - name: P - Item
+    uniqueID: 1440500223
+    locked: 0
+  - name: P - UI
+    uniqueID: 1525016433
     locked: 0
   m_RenderingLayers:
   - Default

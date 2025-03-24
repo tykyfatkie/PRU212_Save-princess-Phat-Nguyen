@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -31,15 +32,15 @@ public class PlayerMovement : MonoBehaviour
     private float attackTime = 0.2f;
     private float attackCooldown = 0.5f;
     //Live/Death
-    private bool isAlive = true;
+    public bool isAlive = true;
     private Vector2 deathkick = new Vector2(10f, 10f);
     #endregion
 
     //Music
-    [SerializeField] AudioClip attackSFX, deathSFX;
+    [SerializeField] AudioClip attackSFX,jumpSFX,deathSFX;
 
     //Layer
-    public LayerMask groundLayer, climbLayer, enemyLayer;
+    public LayerMask groundLayer, climbLayer, enemyLayer, deathZoneLayer;
     public Vector2 boxSize;   //Check ground
     public float castDistance;
 
@@ -61,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!isAlive) return;
         if (isDashing) return;
-        if (isJumping) return;
+        //if (isJumping) return;
 
         Run();
         ClimbLadder();
@@ -76,7 +77,6 @@ public class PlayerMovement : MonoBehaviour
         
     }
 
-
     #region Run
     void OnMove(InputValue value)
     {
@@ -88,6 +88,7 @@ public class PlayerMovement : MonoBehaviour
         Vector2 playerVelocity = new Vector2(moveInput.x * runSpeed, myRigidbody.linearVelocity.y);
         myRigidbody.linearVelocity = playerVelocity;
         myAnimator.SetFloat("xVelocity", Math.Abs(playerVelocity.x));
+
     }
     void FlipSprite()
     {
@@ -129,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
    
 
     #region Jump
-    void OnJump(InputValue value)
+    private IEnumerator OnJump(InputValue value)
     {
         if (value.isPressed && isGrounded())
         {
@@ -137,6 +138,9 @@ public class PlayerMovement : MonoBehaviour
             Vector2 playerVelocity = new Vector2(myRigidbody.linearVelocity.x, jumpPower);
             myRigidbody.linearVelocity = playerVelocity;
             myAnimator.SetBool("isJumping", true);
+            AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+
+            yield return new WaitForSeconds(0.5f);
             isJumping = false;
         }
     }
@@ -152,18 +156,26 @@ public class PlayerMovement : MonoBehaviour
     
 
     #region Die
-    void Die()
+    public void Die()
     {
-        if (myCapsuleCollider.IsTouchingLayers(enemyLayer))
+        if (myCapsuleCollider.IsTouchingLayers(enemyLayer) || myCapsuleCollider.IsTouchingLayers(deathZoneLayer))
         {
+            Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
             AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
 
             isAlive = false;
             myAnimator.SetTrigger("isDying");
-            myRigidbody.linearVelocity = deathkick;
+            if(!isFacingRight)
+                myRigidbody.linearVelocity = deathkick;
+            else
+            {
+                deathkick.x = -deathkick.x;
+                myRigidbody.linearVelocity = deathkick;
+            }
 
+            //FindAnyObjectByType<HealthBar>().TakeDamage(1);
             FindAnyObjectByType<GameSession>().ProcessPlayerDeath();
-            FindAnyObjectByType<HealthBar>().TakeDamage(1);
+            
 
         }
     }
@@ -172,6 +184,7 @@ public class PlayerMovement : MonoBehaviour
     #region Attack
     void OnAttack(InputValue value)
     {
+        if (isJumping==true) return;
         if (value.isPressed && canAttack)
         {
             StartCoroutine(Attack());
@@ -236,5 +249,13 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-  
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("DeathZone"))
+        {
+            Debug.Log("Die");
+            Die();
+        }
+    }
+
 }

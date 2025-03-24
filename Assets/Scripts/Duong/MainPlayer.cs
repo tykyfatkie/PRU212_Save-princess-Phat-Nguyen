@@ -13,6 +13,13 @@ public class MainPlayer : MonoBehaviour
 	[SerializeField] private Transform groundCheck;
 	[SerializeField] private Transform attackPoint; //Gán GameObject AttackPoint
 
+	public AudioClip jumpSound;
+	public AudioClip attackSound;
+	public AudioClip hurtSound;
+	public AudioClip bgMusic;
+	public AudioClip deathSound;
+	private AudioSource audioSource;
+
 	public GameObject gameOverUI;
 	public HealthBarPS healthBar;
 	private Animator animator;
@@ -32,8 +39,17 @@ public class MainPlayer : MonoBehaviour
 
 	void Start()
 	{
+		audioSource = GetComponent<AudioSource>();
+		audioSource.loop = true;
+		audioSource.clip = bgMusic;
+
+		//Phát nhạc nền khi bắt đầu
+		audioSource.Play();
+
 		rb = GetComponent<Rigidbody2D>();
-		respawnPosition = transform.position; //Lưu vị trí ban đầu
+
+		//Lưu vị trí ban đầu
+		respawnPosition = transform.position;
 	}
 
 	void Update()
@@ -69,6 +85,9 @@ public class MainPlayer : MonoBehaviour
 		if (Input.GetButtonDown("Jump") && isGrounded)
 		{
 			rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+
+			//Âm thanh nhảy
+			audioSource.PlayOneShot(jumpSound);
 		}
 		isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
 	}
@@ -107,9 +126,13 @@ public class MainPlayer : MonoBehaviour
 			}
 		}
 
-		//Đợi animation hoàn thành (0.7s)
-		yield return new WaitForSeconds(0.7f);
+		//Đợi animation hoàn thành (0.85s)
+		yield return new WaitForSeconds(0.85f);
 		animator.ResetTrigger("isAttacking");
+
+		//Âm thanh Player tấn công
+		audioSource.PlayOneShot(attackSound);
+
 		isAttacking = false;
 	}
 
@@ -119,17 +142,11 @@ public class MainPlayer : MonoBehaviour
 		bool isJumping = !isGrounded;
 		animator.SetBool("isRunning", isRunning);
 		animator.SetBool("isJumping", isJumping);
-		//animator.SetTrigger("isAttacking");
 	}
-
 
 	private void OnTriggerEnter2D(Collider2D collision)
 	{
 		Debug.Log("Va chạm với: " + collision.gameObject.name);
-		//if (collision.CompareTag("Fire") && !isInvulnerable)
-		//{
-		//	TakeDamage();
-		//}
 
 		//Check va chạm với dơi (Bat)
 		if (collision.CompareTag("Bat") && !isInvulnerable)
@@ -186,6 +203,9 @@ public class MainPlayer : MonoBehaviour
 			healthBar.TakeDamage(1);
 			Debug.Log("Dính độc!! Máu còn lại: " + health);
 
+			//Âm thanh bị thương
+			audioSource.PlayOneShot(hurtSound);
+
 			//Kích hoạt bất tử tạm thời
 			StartCoroutine(Invulnerability());
 
@@ -209,6 +229,9 @@ public class MainPlayer : MonoBehaviour
 			//Cập nhật thanh máu
 			healthBar.TakeDamage(damage);
 			Debug.Log("Bị Slimer tấn công! Máu còn lại: " + health);
+
+			//Âm thanh bị thương
+			audioSource.PlayOneShot(hurtSound);
 
 			//Kích hoạt bất tử tạm thời để tránh mất máu liên tục
 			StartCoroutine(Invulnerability());
@@ -266,7 +289,7 @@ public class MainPlayer : MonoBehaviour
 		if (isGameOver) return;
 		isGameOver = true;
 
-		// Hiển thị UI Game Over
+		//Hiển thị UI Game Over
 		if (gameOverUI != null)
 		{
 			gameOverUI.SetActive(true);
@@ -279,18 +302,18 @@ public class MainPlayer : MonoBehaviour
 			}
 		}
 
+		//Âm thanh Player die
+		audioSource.PlayOneShot(deathSound);
+
 		//Vô hiệu hóa di chuyển nhân vật
 		this.enabled = false;
 		rb.linearVelocity = Vector2.zero;
-
-		//Chờ người chơi nhấn Enter để hồi sinh
-		StartCoroutine(WaitForRespawn());
 	}
 
-	#region Nhấn Enter để hồi sinh
-	IEnumerator WaitForRespawn()
+	#region Nhấn nút "Respawn" để hồi sinh
+	public void RespawnButtonClick()
 	{
-		yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Return));
+		if (!isGameOver) return;
 
 		//Ẩn UI Game Over
 		if (gameOverUI != null)
@@ -328,8 +351,11 @@ public class MainPlayer : MonoBehaviour
 	#region Nhân vật bị đẩy ra khi chạm vào quái
 	private void Knockback(Transform batTransform)
 	{
-		float knockbackForce = 3000f; //Tăng lực đẩy ngang
-		float verticalBoost = 500f; //Tăng lực đẩy lên trên
+		//Tăng lực đẩy ngang
+		float knockbackForce = 3000f;
+
+		//Tăng lực đẩy lên trên
+		float verticalBoost = 500f;
 
 		//Xác định hướng đẩy
 		float direction = (transform.position.x - batTransform.position.x) >= 0 ? 1 : -1;
