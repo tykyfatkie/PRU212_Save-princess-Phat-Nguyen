@@ -11,7 +11,6 @@ public class LevelTimer : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
-        levelTimer.color = Color.white;
     }
 
     void Update()

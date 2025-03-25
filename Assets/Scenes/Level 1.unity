@@ -530,7 +530,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 97.85919, y: 10.002729, z: -10}
+  m_LocalPosition: {x: 95.00391, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5929,8 +5929,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 1000
+  m_fontSizeBase: 1000
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7219,9 +7219,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2079292871285977026, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079292871285977026, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2079292871285977026, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6840768434918490117, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
       propertyPath: m_text
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840768434918490117, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
+      propertyPath: m_fontSize
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 6840768434918490117, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
       propertyPath: m_fontColor.b
@@ -7234,6 +7250,10 @@ PrefabInstance:
     - target: {fileID: 6840768434918490117, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
       propertyPath: m_fontColor.r
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6840768434918490117, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7944884441937409787, guid: 78e13958649cf8645b50e08f817ed54c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

@@ -170,7 +170,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (myCapsuleCollider.IsTouchingLayers(enemyLayer) || myCapsuleCollider.IsTouchingLayers(deathZoneLayer) || myCapsuleCollider.IsTouchingLayers(spikeLayer))
         {
-            Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
+            //Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
             //AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
             audioSource.PlayOneShot(deathSFX);
             isAlive = false;
