@@ -1,4 +1,5 @@
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelTimer : MonoBehaviour
@@ -10,6 +11,7 @@ public class LevelTimer : MonoBehaviour
     void Start()
     {
         startTime = Time.time;
+        levelTimer.color = Color.white;
     }
 
     void Update()

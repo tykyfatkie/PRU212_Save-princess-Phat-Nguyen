@@ -9,10 +9,8 @@ using UnityEngine.UI;
 public class GameSession : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // private int playerLives = 5;
     [SerializeField] private GameObject gameOverUi;
     public HealthBar playerLives;
-    //[SerializeField] int score = 0;
     public bool isInvulnerable = false;
     private static GameSession instance;
 
