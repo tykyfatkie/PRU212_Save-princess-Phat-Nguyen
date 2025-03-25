@@ -17,7 +17,9 @@ public class PlayerControllerAct6 : MonoBehaviour
     private AudioManagerAct6 audioManager;
     private float timer = 0;
     private bool canMove = false;
-    private bool isHurt = false; 
+    private bool isHurt = false;
+    private bool boosted = false; // Biến lưu trạng thái BoostPotion
+
 
     //==================attack==================
     private bool isAttacking = false;
@@ -68,8 +70,11 @@ public class PlayerControllerAct6 : MonoBehaviour
 
     private void HandleMovement()
     {
+        // Kiểm tra nếu boosted thì tăng tốc độ di chuyển
+        float currentMoveSpeed = boosted ? moveSpeed * 1.5f : moveSpeed; // Tăng 1.5x nếu boosted
+
         float moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput * currentMoveSpeed, rb.linearVelocity.y);
 
         if (moveInput > 0)
             transform.localScale = new Vector3(4, 4, 4);
@@ -77,29 +82,38 @@ public class PlayerControllerAct6 : MonoBehaviour
             transform.localScale = new Vector3(-4, 4, 4);
     }
 
+
     private void HandleJump()
     {
+        // Kiểm tra nếu boosted thì tăng độ cao nhảy
+        float currentJumpForce = boosted ? jumpForce + 5f : jumpForce; // Tăng thêm 5 nếu boosted
+
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             audioManager.PlayJumpSound();
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, currentJumpForce);
         }
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+
     private void HandleAttack()
     {
+        // Kiểm tra nếu boosted thì giảm thời gian hồi chiêu (tăng tốc độ tấn công)
+        float currentAttackRate = boosted ? attackRate * 0.5f : attackRate; // Giảm 50% thời gian hồi chiêu nếu boosted
+
         if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime && !isAttacking)
         {
             isAttacking = true;
             animator.SetTrigger("isAttacking");
             audioManager.PlayAttackSound();
-            nextAttackTime = Time.time + 1f / attackRate;
+            nextAttackTime = Time.time + 1f / currentAttackRate; // Sử dụng attackRate đã được điều chỉnh
 
             // Gọi coroutine để xử lý sát thương sau 1 giây
             StartCoroutine(DealDamageAfterDelay(0.25f));
         }
     }
+
 
     // Coroutine mới để xử lý sát thương sau 1 giây
     private IEnumerator DealDamageAfterDelay(float delay)

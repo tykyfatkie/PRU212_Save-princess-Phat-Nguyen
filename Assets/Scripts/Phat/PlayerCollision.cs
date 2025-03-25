@@ -13,6 +13,7 @@ public class PlayerCollision : MonoBehaviour
     public float flashInterval = 0.1f; // Thời gian nháy khi bất tử
     private GameManager gameManager;
     private bool haveKey = false;
+    private bool boosted = false;
     private AudioManagerAct6 audioManager;
     private HealthBarPlayer healthBar;
     private PlayerControllerAct6 playerController;
@@ -68,13 +69,16 @@ public class PlayerCollision : MonoBehaviour
         }
         else if (collision.CompareTag("Key"))
         {
-            Debug.Log("YOU GOT THE KEY!");
             Destroy(collision.gameObject);
             haveKey = true;
         }
+        else if (collision.CompareTag("BoostPotion"))
+        {
+            Destroy(collision.gameObject);
+            boosted = true;
+        }
         else if (collision.CompareTag("Trap"))
         {
-            Debug.Log("YOU ARE DEADDDD!!!!!");
             if (gameManager != null)
             {
                 gameManager.GameOver();
