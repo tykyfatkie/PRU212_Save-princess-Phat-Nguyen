@@ -14,22 +14,44 @@ public class GameSession : MonoBehaviour
     public HealthBar playerLives;
     //[SerializeField] int score = 0;
     public bool isInvulnerable = false;
+    private static GameSession instance;
 
 
 
     void Awake()
     {
-        gameOverUi.SetActive(false);
-        int numGameSessions = FindObjectsOfType<GameSession>().Length;
-        playerLives = FindObjectOfType<HealthBar>();
-        if (numGameSessions > 1)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        gameOverUi.SetActive(false);
+        playerLives = FindObjectOfType<HealthBar>();
+
+        // Lắng nghe sự kiện khi chuyển màn
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Debug.Log("Đã load màn: " + scene.name);
+
+        // Nếu vào Level 3, xóa GameSession
+        if (scene.name == "Poison-Swamp")
         {
-            DontDestroyOnLoad(gameObject);
+            Debug.Log("Xóa GameSession khi vào Level 3");
+            Destroy(gameObject);
+            instance = null;
         }
+    }
+
+    public static GameSession GetInstance()
+    {
+        return instance;
     }
 
 

@@ -13,14 +13,23 @@ public class HealthBarPS : MonoBehaviour
 
 	void Start()
 	{
+		//currentHealth = maxHealth;
+		
 		currentHealth = maxHealth;
-		CreateHearts();
-	}
+        CreateHearts();
+
+        //update lại UI máu
+        var lastHealth = FindAnyObjectByType<GameSession>().playerLives.currentHealth;
+        SetHealth(lastHealth);
+		currentHealth = lastHealth;
+
+    }
 
 	void CreateHearts()
 	{
 		//Khoảng cách giữa các trái tym
 		float spacing = 50f; 
+
 
 		for (int i = 0; i < maxHealth; i++)
 		{
