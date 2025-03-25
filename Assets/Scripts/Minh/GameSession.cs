@@ -67,7 +67,7 @@ public class GameSession : MonoBehaviour
     {
         gameOverUi.SetActive(false);
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level 1");
         //playerLives = FindObjectOfType<HealthBar>();
         playerLives.SetHealth(3);
     
