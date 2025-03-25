@@ -37,7 +37,8 @@ public class PlayerMovement : MonoBehaviour
     #endregion
 
     //Music
-    [SerializeField] AudioClip attackSFX,jumpSFX,deathSFX;
+    [SerializeField] AudioClip attackSFX,jumpSFX,deathSFX, dashSFX, backgroundSFX;
+    private AudioSource audioSource;
 
     //Layer
     public LayerMask groundLayer, climbLayer, enemyLayer, deathZoneLayer;
@@ -51,11 +52,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        
 
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
         gravityScaleAtStart = myRigidbody.gravityScale;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.clip = backgroundSFX;
+        audioSource.Play();
+
     }
 
     void Update()
@@ -138,7 +146,8 @@ public class PlayerMovement : MonoBehaviour
             Vector2 playerVelocity = new Vector2(myRigidbody.linearVelocity.x, jumpPower);
             myRigidbody.linearVelocity = playerVelocity;
             myAnimator.SetBool("isJumping", true);
-            AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            audioSource.PlayOneShot(jumpSFX);
 
             yield return new WaitForSeconds(0.5f);
             isJumping = false;
@@ -161,8 +170,8 @@ public class PlayerMovement : MonoBehaviour
         if (myCapsuleCollider.IsTouchingLayers(enemyLayer) || myCapsuleCollider.IsTouchingLayers(deathZoneLayer))
         {
             Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
-            AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
-
+            //AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
+            audioSource.PlayOneShot(deathSFX);
             isAlive = false;
             myAnimator.SetTrigger("isDying");
             if(!isFacingRight)
@@ -239,6 +248,8 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.gravityScale = 0;
         myRigidbody.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trailRenderer.emitting = true;
+        //AudioSource.PlayClipAtPoint(dashSFX, Camera.main.transform.position);
+        audioSource.PlayOneShot(dashSFX);
         yield return new WaitForSeconds(dashTime);
         trailRenderer.emitting = false;
         myRigidbody.gravityScale = originalGravity;

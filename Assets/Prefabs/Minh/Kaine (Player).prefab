@@ -227,8 +227,10 @@ MonoBehaviour:
   attackRange: 0.9
   isAlive: 1
   attackSFX: {fileID: 8300000, guid: 4aa459ea116187d4baf93d86798f63a7, type: 3}
-  jumpSFX: {fileID: 8300000, guid: 6b5e3f05a6192954a88fa0dbaa8cebad, type: 3}
+  jumpSFX: {fileID: 8300000, guid: cfcf1b541636cc141a4d65123bd79b92, type: 3}
   deathSFX: {fileID: 8300000, guid: 98b7a3e28d218f044850699e71649b3d, type: 3}
+  dashSFX: {fileID: 8300000, guid: 39910ed185c365a47ac5bbaab9e45b29, type: 3}
+  backgroundSFX: {fileID: 8300000, guid: 25988d8546efd4c408dce69ba5c736a1, type: 3}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -238,6 +240,9 @@ MonoBehaviour:
   enemyLayer:
     serializedVersion: 2
     m_Bits: 512
+  deathZoneLayer:
+    serializedVersion: 2
+    m_Bits: 33554432
   boxSize: {x: 1.19, y: 0.14}
   castDistance: 0.79
   moveInput: {x: 0, y: 0}
