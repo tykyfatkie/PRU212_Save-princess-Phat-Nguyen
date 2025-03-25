@@ -44,13 +44,12 @@ public class GameSession : MonoBehaviour
     public IEnumerator WaitAndRestart()
     {
         var player = FindAnyObjectByType<PlayerMovement>();
+        if (player == null) yield break;
+
         if (playerLives.currentHealth > 1)
         {
             playerLives.TakeDamage(1);
-            if (!isInvulnerable)
-            {
-                StartCoroutine(Invulnerability());
-            }
+            if (!isInvulnerable) StartCoroutine(Invulnerability());
             yield return new WaitForSeconds(1f);
             player.isAlive = true;
         }
@@ -77,15 +76,21 @@ public class GameSession : MonoBehaviour
 
     private IEnumerator Invulnerability()
     {
-        SpriteRenderer player = FindObjectOfType<PlayerMovement>().GetComponent<SpriteRenderer>();
+        var player = FindObjectOfType<PlayerMovement>();
+        if (player == null || !player.isAlive) yield break;
+
+        var playerRenderer = player.GetComponent<SpriteRenderer>();
+        if (playerRenderer == null) yield break;
+
         isInvulnerable = true;
+
         for (int i = 0; i < 5; i++)
         {
-            player.enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            player.enabled = true;
+            playerRenderer.enabled = !playerRenderer.enabled;
             yield return new WaitForSeconds(0.1f);
         }
+
+        playerRenderer.enabled = true;
         isInvulnerable = false;
     }
 }
