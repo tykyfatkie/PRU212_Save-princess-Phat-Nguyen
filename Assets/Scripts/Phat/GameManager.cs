@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private AudioManagerAct6 audioManager;
     private GameManager gameManager;
     [SerializeField] private GameObject[] healthLayouts;
+    public static GameManager Instance;
     void Start()
     {
         gameOverUi.SetActive(false);
@@ -46,4 +47,5 @@ public class GameManager : MonoBehaviour
     {
         return isGameOver;
     }
+
 }

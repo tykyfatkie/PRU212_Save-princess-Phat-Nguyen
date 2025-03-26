@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1643405706880054535}
   - component: {fileID: 7844236020180071711}
   - component: {fileID: 8062077468017350408}
-  m_Layer: 0
+  - component: {fileID: 7725187653279383887}
+  m_Layer: 15
   m_Name: Laser
-  m_TagString: Untagged
+  m_TagString: Enemy - Jumper
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,8 +28,8 @@ Transform:
   m_GameObject: {fileID: 7507533007207954035}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -154.24054, y: -342.24625, z: 0}
-  m_LocalScale: {x: 18, y: 18, z: 18}
+  m_LocalPosition: {x: -184.96, y: -365.94, z: 0}
+  m_LocalScale: {x: 26.990002, y: 26.990002, z: 26.990002}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -100,3 +101,44 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d3b3be660ec834d834f593ef42a84f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 80
+  destroyTime: 10
+  delayTime: 4
+  chargeTime: 2
+  firePoint: {fileID: 0}
+--- !u!58 &7725187653279383887
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7507533007207954035}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0.012407191, y: 0.0028634963}
+  m_Radius: 0.053647727

@@ -3,77 +3,59 @@ using UnityEngine;
 
 public class BossController : MonoBehaviour
 {
-    public int health = 1000;  // Lượng máu của boss
-    public Transform weakPoint; // Điểm yếu của boss
-    public GameObject thunderPrefab; // Prefab tia sét
-    public GameObject laserPrefab; // Prefab tia laser
-    public float thunderInterval = 5f; // Thời gian triệu hồi tia sét
-    public float laserInterval = 3f; // Thời gian bắn tia laser
+    public int health = 1000;
+    public int maxHealth = 2500;
+    private int currentHealth;
     private bool isDead = false;
 
-    private Animator animator;  // Tham chiếu đến Animator
+    private Animator animator;
 
-    void Start()
+    private void Start()
     {
-        animator = GetComponent<Animator>();  // Lấy Animator từ GameObject
-        StartCoroutine(ThunderRoutine());
-        StartCoroutine(LaserRoutine());
+        animator = GetComponent<Animator>();
+        currentHealth = maxHealth;
+        StartCoroutine(BossRoutine());  // Bắt đầu Coroutine điều khiển boss
     }
 
     void Update()
     {
-        // Kiểm tra va chạm khi người chơi đánh vào điểm yếu
         if (isDead) return;
     }
 
-    // Khi boss nhận sát thương từ người chơi
-    public void TakeDamage(int damage)
+    public void BossTakeDamage(int damage)
     {
-        health -= damage;
-        if (health <= 0)
+        currentHealth -= damage;
+        Debug.Log($"Enemy took {damage} damage! Current health: {currentHealth}");
+
+        if (currentHealth <= 0)
         {
-            health = 0;
             Die();
         }
     }
 
-    // Triệu hồi tia sét từ trên trời
-    private IEnumerator ThunderRoutine()
+    // Coroutine điều khiển hành động của boss
+    private IEnumerator BossRoutine()
     {
-        while (!isDead)
-        {
-            yield return new WaitForSeconds(thunderInterval);
+        // Boss sẽ ở trạng thái Idle trong 30 giây đầu tiên
+        animator.SetTrigger("Idle");
+        yield return new WaitForSeconds(30f);  // Boss sẽ idle trong 30 giây
 
-            // Kích hoạt animation BossRage khi triệu hồi tia sét
-            animator.SetTrigger("Rage");
+        // Sau 30 giây, Boss sẽ thực hiện animation Rage trong 10 giây
+        animator.SetTrigger("Rage");
+        yield return new WaitForSeconds(10f);  // Thực hiện Rage trong 10 giây
 
-            Vector3 spawnPosition = new Vector3(Random.Range(-5f, 5f), 10f, 0f);
-            Instantiate(thunderPrefab, spawnPosition, Quaternion.identity);
-        }
+        // Quay lại trạng thái Idle sau khi kết thúc Rage
+        animator.SetTrigger("Idle");
+        yield return new WaitForSeconds(30f);  // Chờ thêm 30 giây nữa trước khi tiếp tục lặp lại
     }
 
-    // Bắn tia laser
-    private IEnumerator LaserRoutine()
-    {
-        while (!isDead)
-        {
-            yield return new WaitForSeconds(laserInterval);
-            Vector3 laserPosition = new Vector3(transform.position.x, transform.position.y, 0f);
-            Instantiate(laserPrefab, laserPosition, Quaternion.identity);
-        }
-    }
-
-    // Khi boss chết
+    // Xử lý khi boss chết
     private void Die()
     {
         if (!isDead)
         {
             isDead = true;
-
-            // Kích hoạt animation BossDie khi boss chết
-            animator.SetTrigger("Die");
-
-            // Thêm hiệu ứng hoặc âm thanh khi boss chết
+            animator.SetTrigger("Die"); // Kích hoạt animation Die khi boss chết
             Debug.Log("Boss Defeated!");
         }
     }

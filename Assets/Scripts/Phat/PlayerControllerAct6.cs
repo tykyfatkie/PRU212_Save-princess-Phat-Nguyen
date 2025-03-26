@@ -18,7 +18,7 @@ public class PlayerControllerAct6 : MonoBehaviour
     private float timer = 0;
     private bool canMove = false;
     private bool isHurt = false;
-    private bool boosted = false; // Biến lưu trạng thái BoostPotion
+    private bool boosted = false; 
 
 
     //==================attack==================
@@ -68,10 +68,18 @@ public class PlayerControllerAct6 : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BoostPotion"))
+        {
+            Destroy(collision.gameObject);
+            boosted = true;
+        }
+    }
+
     private void HandleMovement()
     {
-        // Kiểm tra nếu boosted thì tăng tốc độ di chuyển
-        float currentMoveSpeed = boosted ? moveSpeed * 1.5f : moveSpeed; // Tăng 1.5x nếu boosted
+        float currentMoveSpeed = boosted ? moveSpeed * 1.15f : moveSpeed; 
 
         float moveInput = Input.GetAxis("Horizontal");
         rb.linearVelocity = new Vector2(moveInput * currentMoveSpeed, rb.linearVelocity.y);
@@ -85,8 +93,7 @@ public class PlayerControllerAct6 : MonoBehaviour
 
     private void HandleJump()
     {
-        // Kiểm tra nếu boosted thì tăng độ cao nhảy
-        float currentJumpForce = boosted ? jumpForce + 5f : jumpForce; // Tăng thêm 5 nếu boosted
+        float currentJumpForce = boosted ? jumpForce + 2f : jumpForce;
 
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
@@ -99,29 +106,24 @@ public class PlayerControllerAct6 : MonoBehaviour
 
     private void HandleAttack()
     {
-        // Kiểm tra nếu boosted thì giảm thời gian hồi chiêu (tăng tốc độ tấn công)
-        float currentAttackRate = boosted ? attackRate * 0.5f : attackRate; // Giảm 50% thời gian hồi chiêu nếu boosted
+        float currentAttackRate = boosted ? attackRate * 2.5f : attackRate; 
 
         if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime && !isAttacking)
         {
             isAttacking = true;
             animator.SetTrigger("isAttacking");
             audioManager.PlayAttackSound();
-            nextAttackTime = Time.time + 1f / currentAttackRate; // Sử dụng attackRate đã được điều chỉnh
+            nextAttackTime = Time.time + 1f / currentAttackRate; 
 
-            // Gọi coroutine để xử lý sát thương sau 1 giây
             StartCoroutine(DealDamageAfterDelay(0.25f));
         }
     }
 
-
-    // Coroutine mới để xử lý sát thương sau 1 giây
     private IEnumerator DealDamageAfterDelay(float delay)
     {
-        // Đợi theo thời gian delay trước khi gây sát thương
+
         yield return new WaitForSeconds(delay);
 
-        // Gây sát thương cho kẻ địch trong phạm vi
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -132,7 +134,6 @@ public class PlayerControllerAct6 : MonoBehaviour
             }
         }
 
-        // Reset trạng thái tấn công
         isAttacking = false;
         animator.ResetTrigger("isAttacking");
     }
