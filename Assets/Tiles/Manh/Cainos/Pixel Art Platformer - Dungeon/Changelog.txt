@@ -1,0 +1,34 @@
+Pixel Art Platformer - Dungeon
+
+1.1.5
+	- Some minor bugs fixed.
+
+1.1.4
+	- Fix some minor issues in Unity 6.
+
+1.1.3
+	- Some minor bugs fixed.
+
+1.1.2
+	- Some minor bugs fixed.
+
+1.1.1
+	- Some minor bugs fixed.
+	- Add document.
+
+1.1.0
+	- Add URP 2D lighting support.
+
+1.0.3
+	- Tileset collider shape improvements.
+	- Editor scripts improvements.
+	- Some minor bugs fixed.
+
+1.0.2
+	- Some minor bugs fixed.
+
+1.0.1
+	- Some minor bugs fixed.
+
+1.0.0
+	- First Release.

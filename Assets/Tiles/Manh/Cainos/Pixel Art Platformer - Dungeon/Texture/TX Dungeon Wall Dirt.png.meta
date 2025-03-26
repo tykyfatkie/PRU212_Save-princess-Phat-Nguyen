@@ -1,0 +1,502 @@
+fileFormatVersion: 2
+guid: 788b01b24b947f74b9c18245e3cf1ef3
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 0
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 01
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 220
+        width: 51
+        height: 25
+      alignment: 9
+      pivot: {x: 0.49019608, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c1bc51c117d96b44e92b83c05d6eb8e1
+      internalID: 1011848814
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 02
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 225
+        width: 33
+        height: 18
+      alignment: 9
+      pivot: {x: 0.4848485, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 520b738290bcdb045ae4388612938270
+      internalID: 1520466344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 03
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 223
+        width: 38
+        height: 27
+      alignment: 9
+      pivot: {x: 0.5, y: 0.4814815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2202c9676921d74498ac067df82e2803
+      internalID: -1933495746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 05
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 194
+        width: 36
+        height: 16
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e69b097a29513d4d8f74c5f1303f292
+      internalID: 1693221278
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 06
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 188
+        width: 53
+        height: 26
+      alignment: 9
+      pivot: {x: 0.49056605, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4ea6872b2ec91341a585db96daa6299
+      internalID: -1031036300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 07
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 175
+        width: 40
+        height: 34
+      alignment: 9
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e5002d074cfbcfd4b838caee8eb389e7
+      internalID: 1491061045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 08
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 172
+        width: 47
+        height: 29
+      alignment: 9
+      pivot: {x: 0.4893617, y: 0.4827586}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fce86c57e89babf40abcf19cb0a59a9a
+      internalID: -1469892866
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 09
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 155
+        width: 32
+        height: 25
+      alignment: 9
+      pivot: {x: 0.5, y: 0.48}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16e0e13a6a7d14f4e8fd956b5bdb0597
+      internalID: 353587064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 10
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 154
+        width: 42
+        height: 23
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47826087}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 31bff1e5a405caf4ab43da7be9251eb2
+      internalID: 369098457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 11
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 141
+        width: 41
+        height: 20
+      alignment: 9
+      pivot: {x: 0.4878049, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65e4d31b7a56d3545a184f4a4a9f32b7
+      internalID: -231488988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 12
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 155
+        width: 21
+        height: 15
+      alignment: 9
+      pivot: {x: 0.47619048, y: 0.46666667}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3e8339d5f36164446957f50b963f80dd
+      internalID: -1126232417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 13
+      rect:
+        serializedVersion: 2
+        x: 23
+        y: 128
+        width: 27
+        height: 18
+      alignment: 9
+      pivot: {x: 0.4814815, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c1c3b5bfe670204a8e9f8339c42babd
+      internalID: 238850072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 14
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 132
+        width: 14
+        height: 17
+      alignment: 9
+      pivot: {x: 0.5, y: 0.47058824}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23c7fa7b2749ecf4f95074b6b34e3e7c
+      internalID: -831773984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - Kitchen 01
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 0
+        width: 127
+        height: 127
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fd1b2c3d056721439a79b6ea7200da5
+      internalID: 950417661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: TX Dungeon Wall Dirt - 04
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 232
+        width: 17
+        height: 8
+      alignment: 9
+      pivot: {x: 0.47058824, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 73317dec2cf347d48b1200a5ea71dd40
+      internalID: -83548089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      TX Dungeon Wall Dirt - 01: 1011848814
+      TX Dungeon Wall Dirt - 02: 1520466344
+      TX Dungeon Wall Dirt - 03: -1933495746
+      TX Dungeon Wall Dirt - 04: -83548089
+      TX Dungeon Wall Dirt - 05: 1693221278
+      TX Dungeon Wall Dirt - 06: -1031036300
+      TX Dungeon Wall Dirt - 07: 1491061045
+      TX Dungeon Wall Dirt - 08: -1469892866
+      TX Dungeon Wall Dirt - 09: 353587064
+      TX Dungeon Wall Dirt - 10: 369098457
+      TX Dungeon Wall Dirt - 11: -231488988
+      TX Dungeon Wall Dirt - 12: -1126232417
+      TX Dungeon Wall Dirt - 13: 238850072
+      TX Dungeon Wall Dirt - 14: -831773984
+      TX Dungeon Wall Dirt - Kitchen 01: 950417661
+      TX Dungeon Wall Dirt_9: -618997130
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
