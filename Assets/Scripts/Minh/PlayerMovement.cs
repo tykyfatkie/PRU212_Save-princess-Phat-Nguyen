@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -33,14 +34,15 @@ public class PlayerMovement : MonoBehaviour
     private float attackCooldown = 0.5f;
     //Live/Death
     public bool isAlive = true;
-    private Vector2 deathkick = new Vector2(10f, 10f);
+    private Vector2 deathkick = new Vector2(5f, 5f);
     #endregion
 
     //Music
-    [SerializeField] AudioClip attackSFX,jumpSFX,deathSFX;
+    [SerializeField] AudioClip attackSFX,jumpSFX,deathSFX, dashSFX, backgroundSFX;
+    private AudioSource audioSource;
 
     //Layer
-    public LayerMask groundLayer, climbLayer, enemyLayer, deathZoneLayer;
+    public LayerMask groundLayer, climbLayer, enemyLayer, deathZoneLayer, spikeLayer;
     public Vector2 boxSize;   //Check ground
     public float castDistance;
 
@@ -51,11 +53,18 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        
 
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myCapsuleCollider = GetComponent<CapsuleCollider2D>();
         gravityScaleAtStart = myRigidbody.gravityScale;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.clip = backgroundSFX;
+        audioSource.Play();
+
     }
 
     void Update()
@@ -138,7 +147,8 @@ public class PlayerMovement : MonoBehaviour
             Vector2 playerVelocity = new Vector2(myRigidbody.linearVelocity.x, jumpPower);
             myRigidbody.linearVelocity = playerVelocity;
             myAnimator.SetBool("isJumping", true);
-            AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            //AudioSource.PlayClipAtPoint(jumpSFX, Camera.main.transform.position);
+            audioSource.PlayOneShot(jumpSFX);
 
             yield return new WaitForSeconds(0.5f);
             isJumping = false;
@@ -158,11 +168,11 @@ public class PlayerMovement : MonoBehaviour
     #region Die
     public void Die()
     {
-        if (myCapsuleCollider.IsTouchingLayers(enemyLayer) || myCapsuleCollider.IsTouchingLayers(deathZoneLayer))
+        if (myCapsuleCollider.IsTouchingLayers(enemyLayer) || myCapsuleCollider.IsTouchingLayers(deathZoneLayer) || myCapsuleCollider.IsTouchingLayers(spikeLayer))
         {
-            Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
-            AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
-
+            //Debug.Log(myCapsuleCollider.IsTouchingLayers(deathZoneLayer));
+            //AudioSource.PlayClipAtPoint(deathSFX, Camera.main.transform.position);
+            audioSource.PlayOneShot(deathSFX);
             isAlive = false;
             myAnimator.SetTrigger("isDying");
             if(!isFacingRight)
@@ -197,13 +207,23 @@ public class PlayerMovement : MonoBehaviour
         isAttacking = true;
         myAnimator.SetTrigger("Attack");
 
-        AudioSource.PlayClipAtPoint(attackSFX, Camera.main.transform.position);
-        
+        //AudioSource.PlayClipAtPoint(attackSFX, Camera.main.transform.position);
+        audioSource.PlayOneShot(attackSFX);
+
         Vector2 attackPosition = (Vector2)transform.position + (isFacingRight ? attackOffset : new Vector2(-attackOffset.x, attackOffset.y));
+        HashSet<GameObject> damagedEnemies = new HashSet<GameObject>();
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPosition, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
-            enemy.GetComponent<EnemyMovement>().TakeDamage(100);
+            if (enemy == null) continue; 
+
+            EnemyMovement enemyScript = enemy.GetComponent<EnemyMovement>();
+            if (enemyScript != null && !damagedEnemies.Contains(enemy.gameObject))
+            {
+                damagedEnemies.Add(enemy.gameObject);
+                enemyScript.TakeDamage(100);
+            }
+
         }
         yield return new WaitForSeconds(attackTime);
 
@@ -239,6 +259,8 @@ public class PlayerMovement : MonoBehaviour
         myRigidbody.gravityScale = 0;
         myRigidbody.linearVelocity = new Vector2(transform.localScale.x * dashingPower, 0f);
         trailRenderer.emitting = true;
+        //AudioSource.PlayClipAtPoint(dashSFX, Camera.main.transform.position);
+        audioSource.PlayOneShot(dashSFX);
         yield return new WaitForSeconds(dashTime);
         trailRenderer.emitting = false;
         myRigidbody.gravityScale = originalGravity;
@@ -251,10 +273,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("DeathZone"))
+        if (other.CompareTag("DeathZone") || other.CompareTag("Spike"))
         {
             Debug.Log("Die");
+            FindAnyObjectByType<HealthBar>().TakeDamage(5);
             Die();
+
+
         }
     }
 

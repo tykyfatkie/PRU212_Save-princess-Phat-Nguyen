@@ -9,27 +9,47 @@ using UnityEngine.UI;
 public class GameSession : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    // private int playerLives = 5;
     [SerializeField] private GameObject gameOverUi;
     public HealthBar playerLives;
-    //[SerializeField] int score = 0;
     public bool isInvulnerable = false;
+    private static GameSession instance;
 
 
 
     void Awake()
     {
-        gameOverUi.SetActive(false);
-        int numGameSessions = FindObjectsOfType<GameSession>().Length;
-        playerLives = FindObjectOfType<HealthBar>();
-        if (numGameSessions > 1)
+        if (instance != null && instance != this)
         {
             Destroy(gameObject);
+            return;
         }
-        else
+
+        instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        gameOverUi.SetActive(false);
+        playerLives = FindObjectOfType<HealthBar>();
+
+        // Lắng nghe sự kiện khi chuyển màn
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        //Debug.Log("Đã load màn: " + scene.name);
+
+        // Nếu vào Level 3, xóa GameSession
+        if (scene.name == "Poison-Swamp")
         {
-            DontDestroyOnLoad(gameObject);
+            Debug.Log("Xóa GameSession khi vào Level 3");
+            Destroy(gameObject);
+            instance = null;
         }
+    }
+
+    public static GameSession GetInstance()
+    {
+        return instance;
     }
 
 
@@ -44,13 +64,12 @@ public class GameSession : MonoBehaviour
     public IEnumerator WaitAndRestart()
     {
         var player = FindAnyObjectByType<PlayerMovement>();
+        if (player == null) yield break;
+
         if (playerLives.currentHealth > 1)
         {
             playerLives.TakeDamage(1);
-            if (!isInvulnerable)
-            {
-                StartCoroutine(Invulnerability());
-            }
+            if (!isInvulnerable) StartCoroutine(Invulnerability());
             yield return new WaitForSeconds(1f);
             player.isAlive = true;
         }
@@ -68,7 +87,7 @@ public class GameSession : MonoBehaviour
     {
         gameOverUi.SetActive(false);
         Time.timeScale = 1;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Level 1");
         //playerLives = FindObjectOfType<HealthBar>();
         playerLives.SetHealth(3);
     
@@ -77,15 +96,21 @@ public class GameSession : MonoBehaviour
 
     private IEnumerator Invulnerability()
     {
-        SpriteRenderer player = FindObjectOfType<PlayerMovement>().GetComponent<SpriteRenderer>();
+        var player = FindObjectOfType<PlayerMovement>();
+        if (player == null || !player.isAlive) yield break;
+
+        var playerRenderer = player.GetComponent<SpriteRenderer>();
+        if (playerRenderer == null) yield break;
+
         isInvulnerable = true;
+
         for (int i = 0; i < 5; i++)
         {
-            player.enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            player.enabled = true;
+            playerRenderer.enabled = !playerRenderer.enabled;
             yield return new WaitForSeconds(0.1f);
         }
+
+        playerRenderer.enabled = true;
         isInvulnerable = false;
     }
 }

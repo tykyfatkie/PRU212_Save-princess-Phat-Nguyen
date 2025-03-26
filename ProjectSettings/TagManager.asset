@@ -20,6 +20,8 @@ TagManager:
   - Trap
   - DeathZone
   - Ceiling
+  - Ice
+  - Spike
   layers:
   - Default
   - TransparentFX
@@ -45,7 +47,7 @@ TagManager:
   - Crab
   - Gate
   - Trap
-  - 
+  - Spike
   - DeathZone
   - Ceiling
   - 
