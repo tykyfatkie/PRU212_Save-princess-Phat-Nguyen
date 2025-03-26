@@ -9,14 +9,17 @@ EditorBuildSettings:
     path: Assets/Scenes/LoginScene.unity
     guid: 67a01d7c503e65a4bad8a8d0fc9b0c42
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 38da35c2f9ba9b74eae53f9fe33e6970
+  - enabled: 1
     path: Assets/Scenes/Level 1.unity
     guid: 26dc58d6cbcd3424b8e7830af22ed02f
   - enabled: 1
     path: Assets/Scenes/Level 2.unity
-    guid: 9d15f9aa6ef42ff44beeb74a59558406
+    guid: 4bbcff0e31ef51f4e8e83eb1c7a5ab91
   - enabled: 1
     path: Assets/Scenes/Poison-Swamp.unity
-    guid: 26b0cf530d8a797478bb8017c4b996d6
+    guid: f2f8a573cd6476d479c494958713fbb1
   - enabled: 1
     path: Assets/Scenes/Boss.unity
     guid: 8c88d668b06755d41808f80b81d82f68

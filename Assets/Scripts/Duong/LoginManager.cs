@@ -20,7 +20,7 @@ public class LoginManager : MonoBehaviour
 			messageText.text = "Login Successful!";
 
 			//Chuyển sang Scene chính
-			SceneManager.LoadScene("Level 1");
+			SceneManager.LoadScene("MainMenu");
 		}
 		else
 		{
