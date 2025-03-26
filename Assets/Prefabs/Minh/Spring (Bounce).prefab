@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6579331700052835588}
   - component: {fileID: 7810002125912448662}
   - component: {fileID: 5867890524925080002}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Spring (Bounce)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

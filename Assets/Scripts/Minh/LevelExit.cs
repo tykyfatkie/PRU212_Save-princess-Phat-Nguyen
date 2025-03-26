@@ -10,6 +10,7 @@ public class LevelExit : MonoBehaviour
         var player = FindAnyObjectByType<PlayerMovement>();
         if (other.tag== "Player" && player.isAlive)
         {
+            //FindObjectOfType<LevelTimer>()?.StopTimer();
             StartCoroutine(LoadNextLevel());
         }
     }
@@ -25,5 +26,10 @@ public class LevelExit : MonoBehaviour
             nextScenceIndex = 0;
         }
         SceneManager.LoadScene(nextScenceIndex);
+
+        if (currentSceneIndex == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            FindObjectOfType<LevelTimer>()?.StopTimer();
+        }
     }
 }

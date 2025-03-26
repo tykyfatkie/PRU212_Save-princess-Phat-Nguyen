@@ -25,7 +25,7 @@ public class MainPlayer : MonoBehaviour
 	private Animator animator;
 	private Rigidbody2D rb;
 	private Vector3 respawnPosition; //Vị trí hồi sinh
-	public int health = 5;
+	private int health;
 	public bool isInvulnerable = false; //Tránh mất máu liên tục
 	private bool isGrounded;
 	private bool isAttacking = false;
@@ -35,7 +35,9 @@ public class MainPlayer : MonoBehaviour
 	{
 		animator = GetComponent<Animator>();
 		rb = GetComponent<Rigidbody2D>();
-	}
+		health = FindAnyObjectByType<GameSession>().playerLives.currentHealth;
+
+    }
 
 	void Start()
 	{

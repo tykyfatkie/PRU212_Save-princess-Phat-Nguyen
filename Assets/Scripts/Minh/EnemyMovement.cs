@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
@@ -6,13 +8,16 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float moveSpeed = 2f;
     //[SerializeField] int maxHealth = 100;
 
-    int currentHealth = 100;
-    bool isFacingRight = false;
+    private Vector2 deathkick = new Vector2(10f, 10f);
+    private int currentHealth = 200;
+    private bool isFacingRight = false;
     Rigidbody2D myRigidbody;
+    Animator myAnimation;
 
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
+        myAnimation = GetComponent<Animator>();
 
     }
 
@@ -27,10 +32,31 @@ public class EnemyMovement : MonoBehaviour
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        if (currentHealth <= 0)
+        Debug.Log("Enemy Health: " + currentHealth);
+
+        if (currentHealth > 0)
         {
-            Destroy(gameObject);
+            myAnimation.SetTrigger("Hurt");
+            StartCoroutine(StunEffect(0.5f));
         }
+        else
+        {
+            StartCoroutine(DieEffect()); 
+        }
+    }
+
+    IEnumerator StunEffect(float stunDuration)
+    {
+        moveSpeed = 0; // Ngừng di chuyển
+        yield return new WaitForSeconds(stunDuration);
+        moveSpeed = 2f; // Quay lại tốc độ ban đầu
+    }
+
+    IEnumerator DieEffect()
+    {
+        myAnimation.SetTrigger("Die");
+        yield return new WaitForSeconds(0.5f); 
+        Destroy(gameObject);
     }
 
     void OnTriggerExit2D(Collider2D other)
