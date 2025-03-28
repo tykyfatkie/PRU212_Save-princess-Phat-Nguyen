@@ -8,7 +8,7 @@ public class LevelExit : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         var player = FindAnyObjectByType<PlayerMovement>();
-        if (other.tag== "PlayerMovement" && player.isAlive)
+        if (other.tag== "Player" && player.isAlive)
         {
             //FindObjectOfType<LevelTimer>()?.StopTimer();s
             StartCoroutine(LoadNextLevel());
