@@ -37,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
         if (currentHealth > 0)
         {
             myAnimation.SetTrigger("Hurt");
-            StartCoroutine(StunEffect(0.5f));
+            StartCoroutine(StunEffect(0.75f));
         }
         else
         {

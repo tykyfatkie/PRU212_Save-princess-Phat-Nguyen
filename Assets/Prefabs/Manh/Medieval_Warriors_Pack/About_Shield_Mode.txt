@@ -1,0 +1,2 @@
+When the characater is in "shield_mode", he can not walk and jump but he can dead.
+This "shield mode" is for being used while the character should receive a reduced damage.

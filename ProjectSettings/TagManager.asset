@@ -20,8 +20,7 @@ TagManager:
   - Trap
   - DeathZone
   - Ceiling
-  - Ice
-  - Spike
+  - BoostPotion
   layers:
   - Default
   - TransparentFX
@@ -47,7 +46,7 @@ TagManager:
   - Crab
   - Gate
   - Trap
-  - Spike
+  - 
   - DeathZone
   - Ceiling
   - 
@@ -97,9 +96,6 @@ TagManager:
     locked: 0
   - name: P - Layer
     uniqueID: 4233726077
-    locked: 0
-  - name: P - Decor
-    uniqueID: 1187595937
     locked: 0
   - name: P - Ground
     uniqueID: 4001884031

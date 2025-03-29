@@ -13,6 +13,7 @@ public class AudioManagerAct6 : MonoBehaviour
     [SerializeField] AudioClip deathScreenClip;
     [SerializeField] AudioClip dashClip;
     [SerializeField] AudioClip hitClip;
+    [SerializeField] AudioClip laserClip;
 
     void Start()
     {
@@ -34,6 +35,7 @@ public class AudioManagerAct6 : MonoBehaviour
     {
         backgroundAudioSource.clip = backgroundClip;
         backgroundAudioSource.Play();
+        backgroundAudioSource.loop = true;
     }
 
     public void PlayJumpSound()
@@ -64,5 +66,10 @@ public class AudioManagerAct6 : MonoBehaviour
     public void HitSound()
     {
         FXAudioSource.PlayOneShot(hitClip);
+    }
+
+    public void LaserSound()
+    {
+        FXAudioSource.PlayOneShot(laserClip);
     }
 }

@@ -10,7 +10,7 @@ public class LevelExit : MonoBehaviour
         var player = FindAnyObjectByType<PlayerMovement>();
         if (other.tag== "Player" && player.isAlive)
         {
-            //FindObjectOfType<LevelTimer>()?.StopTimer();
+            //FindObjectOfType<LevelTimer>()?.StopTimer();s
             StartCoroutine(LoadNextLevel());
         }
     }

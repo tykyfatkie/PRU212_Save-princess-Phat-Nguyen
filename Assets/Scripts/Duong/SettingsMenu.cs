@@ -12,8 +12,10 @@ public class SettingsMenu : MonoBehaviour
 	public Image soundImage;
 	public Image musicImage;
 
-	private bool isSoundOn = true;
-	private bool isMusicOn = true;
+	private void Start()
+	{
+		UpdateIcons();
+	}
 
 	public void ToggleSettingsPanel()
 	{
@@ -22,20 +24,24 @@ public class SettingsMenu : MonoBehaviour
 
 	public void ToggleSound()
 	{
-		isSoundOn = !isSoundOn;
-		soundImage.sprite = isSoundOn ? soundOnIcon : soundOffIcon;
-		//TODO: Tắt/mở âm thanh thật nếu bạn có AudioManager
+		AudioManager.Instance.ToggleSound();
+		UpdateIcons();
 	}
 
 	public void ToggleMusic()
 	{
-		isMusicOn = !isMusicOn;
-		musicImage.sprite = isMusicOn ? musicOnIcon : musicOffIcon;
-		//TODO: Tắt/mở nhạc nền
+		AudioManager.Instance.ToggleMusic();
+		UpdateIcons();
 	}
 
 	public void CloseSettings()
 	{
 		settingsPanel.SetActive(false);
+	}
+
+	private void UpdateIcons()
+	{
+		soundImage.sprite = AudioManager.Instance.isSoundOn ? soundOnIcon : soundOffIcon;
+		musicImage.sprite = AudioManager.Instance.isMusicOn ? musicOnIcon : musicOffIcon;
 	}
 }
