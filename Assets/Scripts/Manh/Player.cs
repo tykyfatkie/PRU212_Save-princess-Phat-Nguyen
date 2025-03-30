@@ -8,12 +8,8 @@ public class Player : MonoBehaviour
 {
     #region Movement
     //Run
-    private float runSpeed = 10f;
+    private float runSpeed = 7f;
     private bool isFacingRight = true;
-    //Jump
-    private float jumpPower = 18f;
-    //Climb
-    private float climbSpeed = 5f;
     private bool isJumping;
     //Dash
     private bool canDash = true;
