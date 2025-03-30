@@ -17,7 +17,9 @@ public class PlayerControllerAct6 : MonoBehaviour
     private AudioManagerAct6 audioManager;
     private float timer = 0;
     private bool canMove = false;
-    private bool isHurt = false; 
+    private bool isHurt = false;
+    private bool boosted = false; 
+
 
     //==================attack==================
     private bool isAttacking = false;
@@ -66,10 +68,21 @@ public class PlayerControllerAct6 : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("BoostPotion"))
+        {
+            Destroy(collision.gameObject);
+            boosted = true;
+        }
+    }
+
     private void HandleMovement()
     {
+        float currentMoveSpeed = boosted ? moveSpeed * 1.15f : moveSpeed; 
+
         float moveInput = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(moveInput * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveInput * currentMoveSpeed, rb.linearVelocity.y);
 
         if (moveInput > 0)
             transform.localScale = new Vector3(4, 4, 4);
@@ -77,37 +90,40 @@ public class PlayerControllerAct6 : MonoBehaviour
             transform.localScale = new Vector3(-4, 4, 4);
     }
 
+
     private void HandleJump()
     {
+        float currentJumpForce = boosted ? jumpForce + 2f : jumpForce;
+
         if (Input.GetButtonDown("Jump") && isGrounded)
         {
             audioManager.PlayJumpSound();
-            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, currentJumpForce);
         }
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+
     private void HandleAttack()
     {
+        float currentAttackRate = boosted ? attackRate * 2.5f : attackRate; 
+
         if (Input.GetKeyDown(KeyCode.X) && Time.time >= nextAttackTime && !isAttacking)
         {
             isAttacking = true;
             animator.SetTrigger("isAttacking");
             audioManager.PlayAttackSound();
-            nextAttackTime = Time.time + 1f / attackRate;
+            nextAttackTime = Time.time + 1f / currentAttackRate; 
 
-            // Gọi coroutine để xử lý sát thương sau 1 giây
             StartCoroutine(DealDamageAfterDelay(0.25f));
         }
     }
 
-    // Coroutine mới để xử lý sát thương sau 1 giây
     private IEnumerator DealDamageAfterDelay(float delay)
     {
-        // Đợi theo thời gian delay trước khi gây sát thương
+
         yield return new WaitForSeconds(delay);
 
-        // Gây sát thương cho kẻ địch trong phạm vi
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, attackRange, enemyLayer);
         foreach (Collider2D enemy in hitEnemies)
         {
@@ -118,7 +134,6 @@ public class PlayerControllerAct6 : MonoBehaviour
             }
         }
 
-        // Reset trạng thái tấn công
         isAttacking = false;
         animator.ResetTrigger("isAttacking");
     }
